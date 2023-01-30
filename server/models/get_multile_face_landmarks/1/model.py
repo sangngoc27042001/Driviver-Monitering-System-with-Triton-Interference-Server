@@ -49,7 +49,7 @@ def get_multile_face_landmarks(image):
         image.flags.writeable = True
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         if results.multi_face_landmarks != None:
-            for face_landmarks in results.multi_face_landmarks:
+            for face_landmarks in results.multi_face_landmarks.landmark:
                 return np.array([[point.x, point.y, point.z] for point in face_landmarks])
         return None
 
