@@ -35,7 +35,7 @@ import numpy as np
 def call_API(input, model_name):
 
     with httpclient.InferenceServerClient("localhost:8000") as client:
-        input0_data = input.astype(np.float32)
+        input0_data = input.astype(np.unit8)
         inputs = [
             httpclient.InferInput("INPUT0", input0_data.shape,
                                 np_to_triton_dtype(input0_data.dtype)),
