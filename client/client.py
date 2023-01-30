@@ -60,3 +60,4 @@ def call_API(input, model_name):
 if __name__=='main':
     model_name = "get_multile_face_landmarks"
     result = call_API(cv2.imread('./test.jpg'), model_name)
+    print(result)
