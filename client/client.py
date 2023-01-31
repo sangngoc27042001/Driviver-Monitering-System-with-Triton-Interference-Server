@@ -29,6 +29,7 @@ import tritonclient.http as httpclient
 import sys
 import cv2
 import numpy as np
+import time
 
 
 
@@ -63,6 +64,14 @@ if __name__=='main':
     result = call_API(cv2.imread('./test.jpg'), model_name)
     print(result)
 
-model_name = "get_multile_face_landmarks"
-result = call_API(cv2.imread('./test.jpg'), model_name)
-print(result)
+start = time.time()
+
+result = call_API(cv2.imread('./test.jpg'), "get_multile_face_landmarks")
+print(f'get_multile_face_landmarks: {time.time()-start}')
+start = time.time()
+print(result.shape)
+
+result = call_API(cv2.imread('./test.jpg'), "get_xyxy_phone_cigarette")
+print(f'get_multile_face_landmarks: {time.time()-start}')
+start = time.time()
+print(result.shape)
