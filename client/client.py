@@ -33,10 +33,10 @@ import time
 
 
 
-def call_API(input, model_name):
+def call_API(input, model_name, inpu_type):
 
     with httpclient.InferenceServerClient("localhost:8000") as client:
-        input0_data = input.astype(np.uint8)
+        input0_data = input.astype(inpu_type)
         inputs = [
             httpclient.InferInput("INPUT0", input0_data.shape,
                                 np_to_triton_dtype(input0_data.dtype)),
@@ -63,17 +63,17 @@ def call_API(input, model_name):
 
 start = time.time()
 
-arrayPoint = call_API(cv2.imread('./test.jpg'), "get_multile_face_landmarks")
+arrayPoint = call_API(cv2.imread('./test.jpg'), "get_multile_face_landmarks", np.uint8)
 print(f'get_multile_face_landmarks: {time.time()-start}')
 start = time.time()
 print(arrayPoint.shape)
 
-xyxy_phone_cigarette = call_API(cv2.imread('./test.jpg'), "get_xyxy_phone_cigarette")
+xyxy_phone_cigarette = call_API(cv2.imread('./test.jpg'), "get_xyxy_phone_cigarette", np.uint8)
 print(f'get_multile_face_landmarks: {time.time()-start}')
 start = time.time()
 print(xyxy_phone_cigarette.shape)
 
-ear_mar = call_API(arrayPoint, "return_variables")
+ear_mar = call_API(arrayPoint, "return_variables", np.float32)
 print(f'return_variables: {time.time()-start}')
 start = time.time()
 print(ear_mar)
