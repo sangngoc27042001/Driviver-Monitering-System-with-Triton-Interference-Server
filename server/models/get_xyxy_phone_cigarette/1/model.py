@@ -46,7 +46,9 @@ config = {
 import torch
 import cv2
 import numpy as np
+import os
 
+print(os.getcwd())
 YOLOV5_phone_cigarette_model = torch.hub.load('ultralytics/yolov5','custom', path = config['YOLOV5_phone_cigarette_model_weight'], force_reload=True)
 def get_xyxy_phone_cigarette(frame, conf_thresh):
     frame_in = frame.copy()
