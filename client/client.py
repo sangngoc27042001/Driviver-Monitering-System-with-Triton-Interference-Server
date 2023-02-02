@@ -59,19 +59,21 @@ def call_API(input, model_name):
         return output0_data
 
 
-if __name__=='main':
-    model_name = "get_multile_face_landmarks"
-    result = call_API(cv2.imread('./test.jpg'), model_name)
-    print(result)
+
 
 start = time.time()
 
-result = call_API(cv2.imread('./test.jpg'), "get_multile_face_landmarks")
+arrayPoint = call_API(cv2.imread('./test.jpg'), "get_multile_face_landmarks")
 print(f'get_multile_face_landmarks: {time.time()-start}')
 start = time.time()
-print(result.shape)
+print(arrayPoint.shape)
 
-result = call_API(cv2.imread('./test.jpg'), "get_xyxy_phone_cigarette")
+xyxy_phone_cigarette = call_API(cv2.imread('./test.jpg'), "get_xyxy_phone_cigarette")
 print(f'get_multile_face_landmarks: {time.time()-start}')
 start = time.time()
-print(result.shape)
+print(xyxy_phone_cigarette.shape)
+
+ear_mar = call_API(arrayPoint, "return_variables")
+print(f'return_variables: {time.time()-start}')
+start = time.time()
+print(ear_mar)
