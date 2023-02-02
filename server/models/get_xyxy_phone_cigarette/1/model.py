@@ -31,17 +31,7 @@ import json
 # contains some utility functions for extracting information from model_config
 # and converting Triton input/output types to numpy types.
 import triton_python_backend_utils as pb_utils
-
-config = {
-    'ear_thesh':0.33,
-    'mar_thesh' : 0.8,
-    'ear_frame_count_thesh' : 5,
-    'mar_frame_count_thesh' : 7,
-    'YOLOV5_phone_cigarette_model_weight': './weights/best_phone_cigaretteV3.pt',
-    'YOLOV5_conf': 0.6,
-    'phone_frame_count_thesh':3,
-    'cigarette_frame_count_thesh':3
-}
+from config import config
 
 import torch
 import cv2
