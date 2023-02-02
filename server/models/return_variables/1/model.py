@@ -35,8 +35,7 @@ from config import config
 
 from scipy.spatial import distance
 import numpy as np
-def return_variables(face_landmarks):
-    arrayPoint = np.array([[point.x, point.y, point.z] for point in face_landmarks.landmark])
+def return_variables(arrayPoint):
     def cal_aspect_ratio(four_points):
         A = distance.euclidean(four_points[1], four_points[3])
         C = distance.euclidean(four_points[0], four_points[2])
