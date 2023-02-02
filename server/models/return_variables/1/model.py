@@ -119,7 +119,7 @@ class TritonPythonModel:
 
             in_0 = in_0.as_numpy()
 
-            out_0 = return_variables(in_0, config['YOLOV5_conf'])
+            out_0 = return_variables(in_0)
 
 
             # Create output tensors. You need pb_utils.Tensor
