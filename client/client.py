@@ -63,7 +63,7 @@ def call_API(input, model_name, inpu_type):
 
 
 image = cv2.imread('./test.jpg')
-image = cv2.flip(1)
+image = cv2.flip(image, 1)
 
 start = time.time()
 
