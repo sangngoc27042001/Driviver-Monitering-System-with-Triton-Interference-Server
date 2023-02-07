@@ -81,7 +81,7 @@ print(xyxy_phone_cigarette.shape)
 
 alerter.recieve_values_phone_cigarette(image, xyxy_phone_cigarette)
 
-if arrayPoint == np.array([[1]]):
+if arrayPoint.shape == (478, 3):
 
     ear_mar = call_API(arrayPoint, "return_variables", np.float32)
     print(f'return_variables: {time.time()-start}')
