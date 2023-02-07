@@ -29,9 +29,11 @@ import tritonclient.http as httpclient
 import sys
 import cv2
 import numpy as np
-import time
+import time 
+from config import config
+from Alert_by_counting_frames import Alert_by_counting_frames
 
-
+alerter = Alert_by_counting_frames()
 
 def call_API(input, model_name, inpu_type):
 
@@ -60,20 +62,34 @@ def call_API(input, model_name, inpu_type):
 
 
 
+image = cv2.imread('./test.jpg')
+image = cv2.flip(1)
 
 start = time.time()
 
-arrayPoint = call_API(cv2.imread('./test.jpg'), "get_multile_face_landmarks", np.uint8)
+arrayPoint = call_API(image, "get_multile_face_landmarks", np.uint8)
 print(f'get_multile_face_landmarks: {time.time()-start}')
 start = time.time()
 print(arrayPoint.shape)
 
-xyxy_phone_cigarette = call_API(cv2.imread('./test.jpg'), "get_xyxy_phone_cigarette", np.uint8)
+xyxy_phone_cigarette = call_API(image, "get_xyxy_phone_cigarette", np.uint8)
 print(f'get_multile_face_landmarks: {time.time()-start}')
 start = time.time()
 print(xyxy_phone_cigarette.shape)
 
-ear_mar = call_API(arrayPoint, "return_variables", np.float32)
-print(f'return_variables: {time.time()-start}')
-start = time.time()
-print(ear_mar)
+
+
+alerter.recieve_values_phone_cigarette(image, xyxy_phone_cigarette)
+
+if arrayPoint == np.array([[1]]):
+
+    ear_mar = call_API(arrayPoint, "return_variables", np.float32)
+    print(f'return_variables: {time.time()-start}')
+    start = time.time()
+    print(ear_mar)
+    ear, mar = ear_mar[0], ear_mar[1]
+
+    alerter.recieve_values_ear_mar(image, ear, mar)
+
+
+

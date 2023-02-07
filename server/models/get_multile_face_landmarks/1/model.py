@@ -51,7 +51,7 @@ def get_multile_face_landmarks(image):
         if results.multi_face_landmarks != None:
             for face_landmarks in results.multi_face_landmarks:
                 return np.array([[point.x, point.y, point.z] for point in face_landmarks.landmark])
-        return None
+        return np.array([[1]])
 
 
 class TritonPythonModel:
