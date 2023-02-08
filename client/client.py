@@ -97,6 +97,7 @@ cap = cv2.VideoCapture('./video_test.avi')
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')
 writer = cv2.VideoWriter('out.avi', fourcc, 5, (640, 480*2))
 
+idx = 1
 while cap.isOpened():
     success, image = cap.read()
     if not success:
@@ -116,8 +117,9 @@ while cap.isOpened():
         ear, mar = ear_mar[0], ear_mar[1]
         alerter.recieve_values_ear_mar(image, ear, mar)
     cv2.putText(image,f"FPS: {round(1/(time.time()-start),2)}", (450, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
-    writer.release()
-    cap.release()
+    print(f'FRAME:{idx}, FPS: {round(1/(time.time()-start),2)}, {(round(ear,2), round(mar,2)) if arrayPoint.shape == (478, 3) else ""}')
+writer.release()
+cap.release()
 
 
 
