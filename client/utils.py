@@ -3,6 +3,7 @@ from config import config
 import cv2
 import numpy as np
 
+
 class Alert_by_counting_frames():
     def __init__(self):
         self.ear_thesh = config['ear_thesh']
@@ -70,6 +71,7 @@ class Alert_by_counting_frames():
         if np.sum(self.dict_ar_lists['cigarette'])>self.cigarette_frame_count_thesh:
             self.put_warning_text(frame, "CIGARETTE DETECTED", 4)
 
+import threading
 class CustomThread(threading.Thread):
     def __init__(self, group=None, target=None, name=None,
                  args=(), kwargs={}, Verbose=None):
