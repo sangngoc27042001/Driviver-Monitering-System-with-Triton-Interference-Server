@@ -69,3 +69,17 @@ class Alert_by_counting_frames():
             self.put_warning_text(frame, "PHONE DETECTED", 3)
         if np.sum(self.dict_ar_lists['cigarette'])>self.cigarette_frame_count_thesh:
             self.put_warning_text(frame, "CIGARETTE DETECTED", 4)
+
+class CustomThread(threading.Thread):
+    def __init__(self, group=None, target=None, name=None,
+                 args=(), kwargs={}, Verbose=None):
+        threading.Thread.__init__(self, group, target, name, args, kwargs)
+        self._return = None
+ 
+    def run(self):
+        if self._target is not None:
+            self._return = self._target(*self._args, **self._kwargs)
+             
+    def join(self, *args):
+        threading.Thread.join(self, *args)
+        return self._return  

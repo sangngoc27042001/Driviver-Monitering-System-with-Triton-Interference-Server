@@ -31,7 +31,7 @@ import cv2
 import numpy as np
 import time 
 from config import config
-from Alert_by_counting_frames import Alert_by_counting_frames
+from utils import Alert_by_counting_frames, CustomThread
 
 alerter = Alert_by_counting_frames()
 
@@ -61,7 +61,7 @@ def call_API(input, model_name, inpu_type):
         return output0_data
 
 
-
+print('**TEST WITH IMAGE**')
 image = cv2.imread('./test.jpg')
 image = cv2.flip(image, 1)
 
@@ -90,6 +90,38 @@ if arrayPoint.shape == (478, 3):
     ear, mar = ear_mar[0], ear_mar[1]
 
     alerter.recieve_values_ear_mar(image, ear, mar)
+
+print('**TEST WITH VIDEO**')
+
+cap = cv2.VideoCapture('./video_test.avi')
+fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+writer = cv2.VideoWriter('out.avi', fourcc, 5, (640, 480*2))
+
+while cap.isOpened():
+    success, image = cap.read()
+    if not success:
+        print("Ignoring empty camera frame.")
+    start = time.time()    
+    # image = cv2.flip(image, 1)
+    process_1 = CustomThread(target=call_API, args=(image, "get_multile_face_landmarks", np.uint8))
+    process_2 = CustomThread(target=call_API, args=(image, "get_xyxy_phone_cigarette", np.uint8))
+    
+    process_1.start()
+    process_2.start()
+
+    arrayPoint = process_1.join()
+    xyxy_phone_cigarette = process_2.join()
+    if arrayPoint.shape == (478, 3):
+        ear_mar = call_API(arrayPoint, "return_variables", np.float32)
+        ear, mar = ear_mar[0], ear_mar[1]
+        alerter.recieve_values_ear_mar(image, ear, mar)
+    cv2.putText(image,f"FPS: {round(1/(time.time()-start),2)}", (450, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
+    writer.release()
+    cap.release()
+
+
+
+
 
 
 
