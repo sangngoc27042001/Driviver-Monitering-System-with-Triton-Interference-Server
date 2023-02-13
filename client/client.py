@@ -95,7 +95,7 @@ print('**TEST WITH VIDEO**')
 
 cap = cv2.VideoCapture('./video_test.avi')
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-writer = cv2.VideoWriter('out.avi', fourcc, 5, (640, 480*2))
+writer = cv2.VideoWriter('out.avi', fourcc, 5, (640, 480))
 
 idx = 1
 while cap.isOpened():
