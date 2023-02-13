@@ -56,7 +56,7 @@ class Alert_by_counting_frames():
     def recieve_values_phone_cigarette(self, frame, xyxy_phone_cigarette):
         phone_detected, cigarette_detected = 0,0
         for xyxy in xyxy_phone_cigarette:
-            cls = xyxy[-1]
+            cls = int(xyxy[-1])
             if cls == 0:
                 phone_detected = 1
             else:
