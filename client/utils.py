@@ -12,7 +12,7 @@ class Alert_by_counting_frames():
         self.mar_frame_count_thesh = config['mar_frame_count_thesh']
         self.phone_frame_count_thesh = config['phone_frame_count_thesh']
         self.cigarette_frame_count_thesh = config['cigarette_frame_count_thesh']
-        self.number_of_func = 4
+        self.number_of_func = 5
 
         #do not change the variables below
         self.dict_ar_lists = {
@@ -67,9 +67,9 @@ class Alert_by_counting_frames():
         self.dict_ar_lists['phone'].append(phone_detected)
         self.dict_ar_lists['cigarette'].append(cigarette_detected)
         if np.sum(self.dict_ar_lists['phone'])>self.phone_frame_count_thesh:
-            self.put_warning_text(frame, "PHONE DETECTED", 3)
+            self.put_warning_text(frame, "PHONE DETECTED", 2)
         if np.sum(self.dict_ar_lists['cigarette'])>self.cigarette_frame_count_thesh:
-            self.put_warning_text(frame, "CIGARETTE DETECTED", 4)
+            self.put_warning_text(frame, "CIGARETTE DETECTED", 3)
 
 import threading
 class CustomThread(threading.Thread):
