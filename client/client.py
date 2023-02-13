@@ -120,7 +120,7 @@ while cap.isOpened():
         alerter.recieve_values_ear_mar(image, ear, mar)
     cv2.putText(image,f"FPS: {round(1/(time.time()-start),2)}", (450, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
     writer.write(image)
-    print(f'FRAME:{idx}, FPS: {round(1/(time.time()-start),2)}, {(round(ear,2), round(mar,2)) if arrayPoint.shape == (478, 3) else ""}')
+    print(f'FRAME:{idx}, FPS: {round(1/(time.time()-start),2)}, {(round(ear,2), round(mar,2)) if arrayPoint.shape == (478, 3) else ""}, {xyxy_phone_cigarette}')
     idx+=1
 writer.release()
 cap.release()
