@@ -66,6 +66,8 @@ class Alert_by_counting_frames():
         self.dict_ar_lists['cigarette'].pop(0)
         self.dict_ar_lists['phone'].append(phone_detected)
         self.dict_ar_lists['cigarette'].append(cigarette_detected)
+
+        print(f'phone: {np.sum(self.dict_ar_lists["phone"])}, cigar: {np.sum(self.dict_ar_lists["cigarette"])}')
         if np.sum(self.dict_ar_lists['phone'])>self.phone_frame_count_thesh:
             self.put_warning_text(frame, "PHONE DETECTED", 2)
         if np.sum(self.dict_ar_lists['cigarette'])>self.cigarette_frame_count_thesh:
