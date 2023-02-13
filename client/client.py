@@ -113,6 +113,7 @@ while cap.isOpened():
 
     arrayPoint = process_1.join()
     xyxy_phone_cigarette = process_2.join()
+    alerter.recieve_values_phone_cigarette(image, xyxy_phone_cigarette)
     if arrayPoint.shape == (478, 3):
         ear_mar = call_API(arrayPoint, "return_variables", np.float32)
         ear, mar = ear_mar[0], ear_mar[1]
