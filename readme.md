@@ -7,8 +7,9 @@ First, we run the Triton Interference Server using docker. `<xx.yy>` here is the
 ```
 docker run --shm-size=1g --ulimit memlock=-1 -p 8000:8000 -p 8001:8001 -p 8002:8002 --ulimit stack=67108864 -ti nvcr.io/nvidia/tritonserver:<xx.yy>-py3 
 ```
-Second, inside the container, launch the [setup.sh](setup.sh) to set up the environment.
+Second, inside the container, clone this repository, and launch the [setup.sh](setup.sh) to set up the environment.
 ```
+git clone https://github.com/sangngoc27042001/Driviver-Monitering-System-with-Triton-Interference-Server.git
 .\setup.sh
 ```
 Finally, start the Triton server.
